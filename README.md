@@ -1,3 +1,6 @@
-MBF 
-Multi Bruteforce Facebook
-Aauthor: pirmansx
+_____________________________
+| Multi Bruteforce Facebook |
+|---------------------------|
+|     Author: pirmansx      |
+|___________________________| 
+
